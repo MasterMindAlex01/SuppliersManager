@@ -1,4 +1,5 @@
-﻿using SuppliersManager.Application.Models.Requests;
+﻿using SuppliersManager.Application.Features.Users.Commands;
+using SuppliersManager.Application.Models.Requests;
 using SuppliersManager.Application.Models.Responses.Users;
 using SuppliersManager.Shared.Wrapper;
 
@@ -8,11 +9,11 @@ namespace SuppliersManager.Application.Interfaces.Services
     {
         Task<IResult<UserResponse>> GetByIdAsync(string id);
 
-        Task<IResult<List<UserResponse>>> GetAllAsync();
+        Task<PaginatedResult<UserResponse>> GetAllAsync(int pageNumber, int pageSize);
 
-        Task<IResult> AddAsync(UserRequest entity);
+        Task<IResult> AddAsync(CreateUserCommand command);
 
-        Task<IResult> UpdateAsync(UserRequest entity);
+        Task<IResult> UpdateAsync(UpdateUserCommand command);
 
         Task<IResult> DeleteAsync(string id);
     }

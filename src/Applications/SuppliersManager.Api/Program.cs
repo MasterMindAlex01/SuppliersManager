@@ -1,20 +1,9 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization;
-using MongoDB.Bson.Serialization.IdGenerators;
-using MongoDB.Bson.Serialization.Serializers;
-using MongoDB.Driver;
+using SuppliersManager.Api.Extensions;
 using SuppliersManager.Application.Extensions;
-using SuppliersManager.Application.Interfaces.Repositories;
-using SuppliersManager.Application.Interfaces.Services;
-using SuppliersManager.Application.Models.Settings;
-using SuppliersManager.Domain.Contracts;
-using SuppliersManager.Infrastructure.MongoDBDriver.Repositories;
-using SuppliersManager.Infrastructure.MongoDBDriver.Services;
-using System.Reflection;
+using SuppliersManager.Infrastructure.MongoDBDriver.Extensions;
 using System.Text;
 
 namespace SuppliersManager.Api
@@ -29,36 +18,15 @@ namespace SuppliersManager.Api
             builder.Services.AddControllers();
 
             // Add services to the container.
-
-            builder.Services.Configure<MongoDBSettings>(builder.Configuration.GetSection("MongoDB"));
-            builder.Services.AddSingleton<IPasswordHasherSettings, PasswordHasherSettings>();
-
-            builder.Services.AddSingleton(sp =>
-            {
-                var mongoSettings =  sp.GetService<IOptions<MongoDBSettings>>();
-                var connectionString = mongoSettings!.Value.ConnectionURI;
-                var client =  new MongoClient(connectionString);
-                var database = mongoSettings!.Value.DatabaseName;
-                return client.GetDatabase(database);
-            });
-
-            BsonClassMap.RegisterClassMap<BaseEntity>(cm =>
-            {
-                cm.AutoMap();
-                cm.GetMemberMap(x => x.Id)
-                  .SetIdGenerator(StringObjectIdGenerator.Instance)
-                  .SetSerializer(new StringSerializer(BsonType.ObjectId));
-            });
-
+            builder.Services.AddSettings(builder.Configuration);
+            //AddDatabase
+            builder.Services.AddMongoDatabase().AddMongoConfigurations();
+            //Configurations Application Layer
             builder.Services.AddApplicationLayer();
 
-            builder.Services
-                .AddScoped(typeof(IRepositoryAsync<>), typeof(RepositoryAsync<>))
-                .AddScoped<IUserRepository, UserRepository>()
-                .AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
+            builder.Services.AddRepositories();
 
-            builder.Services.AddScoped<IAuthService, AuthService>();
-            builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddApplicationServices();
 
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

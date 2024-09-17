@@ -66,9 +66,6 @@ namespace SuppliersManager.Shared.Wrapper
 
     public class Result<T> : Result, IResult<T>
     {
-        public Result()
-        {
-        }
 
         public T Data { get; set; }
 

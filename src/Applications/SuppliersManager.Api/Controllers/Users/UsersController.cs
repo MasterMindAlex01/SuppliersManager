@@ -1,54 +1,56 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using SuppliersManager.Application.Interfaces.Services;
-using SuppliersManager.Application.Models.Requests;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using SuppliersManager.Application.Features.Users.Commands;
+using SuppliersManager.Application.Features.Users.Queries;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace SuppliersManager.Api.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class UsersController : ControllerBase
+    [Authorize]
+    public class UsersController : BaseApiController<UsersController>
     {
-        private readonly IUserService _userService;
-
-        public UsersController(IUserService userService)
-        {
-            _userService = userService;
-        }
-
         // GET: api/<UsersController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        [HttpGet("GetAll")]
+        public async Task<ActionResult> GetAll([FromQuery] GetAllUsersQuery query)
         {
-            return new string[] { "value1", "value2" };
+            var result = await _mediator.Send(query);
+            return Ok(result);
         }
 
         // GET api/<UsersController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("GetUserById")]
+        public async Task<ActionResult> GetUserById([FromQuery] string id)
         {
-            return "value";
+            var query = new GetUserByIdQuery(id);
+            var result = await _mediator.Send(query);
+            return Ok(result);
         }
 
         // POST api/<UsersController>
-        [HttpPost]
-        public async Task<ActionResult> Post([FromBody] UserRequest model)
+        [HttpPost("Register")]
+        [AllowAnonymous]
+        public async Task<ActionResult> Register([FromBody] CreateUserCommand command)
         {
-            var result = await _userService.AddAsync(model);
+            var result = await _mediator.Send(command);
             return Ok(result);
         }
 
         // PUT api/<UsersController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("update")]
+        public async Task<ActionResult> Update([FromBody] UpdateUserCommand command)
         {
+            var result = await _mediator.Send(command);
+            return Ok(result);
         }
 
         // DELETE api/<UsersController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("delete")]
+        public async Task<ActionResult> Delete([FromQuery] string id)
         {
+            var command = new DeleteUserCommand(id);
+            var result = await _mediator.Send(command);
+            return Ok(result);
         }
     }
 }

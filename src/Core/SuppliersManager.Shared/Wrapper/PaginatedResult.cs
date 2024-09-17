@@ -14,7 +14,7 @@ namespace SuppliersManager.Shared.Wrapper
 
         internal PaginatedResult(
             bool succeeded, List<T> data = default!, List<string> messages = null!, 
-            int count = 0, int page = 1, int pageSize = 10)
+            long count = 0, int page = 1, int pageSize = 10)
         {
             Data = data;
             CurrentPage = page;
@@ -29,7 +29,7 @@ namespace SuppliersManager.Shared.Wrapper
             return new PaginatedResult<T>(false, default!, messages);
         }
 
-        public static PaginatedResult<T> Success(List<T> data, int count, int page, int pageSize)
+        public static PaginatedResult<T> Success(List<T> data, long count, int page, int pageSize)
         {
             return new PaginatedResult<T>(true, data, null!, count, page, pageSize);
         }
@@ -38,7 +38,7 @@ namespace SuppliersManager.Shared.Wrapper
 
         public int TotalPages { get; set; }
 
-        public int TotalCount { get; set; }
+        public long TotalCount { get; set; }
         public int PageSize { get; set; }
 
         public bool HasPreviousPage => CurrentPage > 1;

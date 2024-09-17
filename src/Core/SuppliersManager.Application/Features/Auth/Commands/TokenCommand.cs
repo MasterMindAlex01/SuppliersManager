@@ -10,7 +10,7 @@ namespace SuppliersManager.Application.Features.Auth.Commands
 
     }
 
-    public class TokenCommandHandler : IRequestHandler<TokenCommand, TokenCommandResponse>
+    internal class TokenCommandHandler : IRequestHandler<TokenCommand, TokenCommandResponse>
     {
         private readonly IAuthService _authService;
 

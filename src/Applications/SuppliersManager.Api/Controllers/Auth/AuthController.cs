@@ -7,16 +7,16 @@ namespace SuppliersManager.Api.Controllers
     public class AuthController : BaseApiController<AuthController>
     {        
         // POST api/Auth
-        [HttpPost]
-        public async Task<IActionResult> Post(TokenCommand command)
+        [HttpPost("login")]
+        public async Task<IActionResult> LoginToken(TokenCommand command)
         {
             var result = await _mediator.Send(command);
             return Ok(result);
         }
 
         [Authorize]
-        [HttpGet("me")]
-        public IActionResult Me()
+        [HttpGet("authenticated")]
+        public IActionResult Authenticated()
         {
 
             var data = HttpContext.User.Claims.Select(x => new
