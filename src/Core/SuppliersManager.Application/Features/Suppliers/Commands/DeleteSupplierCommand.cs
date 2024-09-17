@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using SuppliersManager.Application.Interfaces.Services;
 using SuppliersManager.Shared.Wrapper;
 
 namespace SuppliersManager.Application.Features.Suppliers.Commands
@@ -15,14 +16,16 @@ namespace SuppliersManager.Application.Features.Suppliers.Commands
 
     internal class DeleteSupplierCommandHandler : IRequestHandler<DeleteSupplierCommand, IResult>
     {
+        private readonly ISupplierService _supplierService;
 
-        public DeleteSupplierCommandHandler()
+        public DeleteSupplierCommandHandler(ISupplierService supplierService)
         {
+            _supplierService = supplierService;
         }
 
         public async Task<IResult> Handle(DeleteSupplierCommand command, CancellationToken cancellationToken)
         {
-            return await Result.SuccessAsync();
+            return await _supplierService.DeleteAsync(command.Id);
         }
     }
 }

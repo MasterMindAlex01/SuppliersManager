@@ -1,5 +1,4 @@
 ﻿using SuppliersManager.Application.Features.Users.Commands;
-using SuppliersManager.Application.Models.Requests;
 using SuppliersManager.Application.Models.Responses.Users;
 using SuppliersManager.Shared.Wrapper;
 

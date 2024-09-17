@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using SuppliersManager.Application.Interfaces.Services;
 using SuppliersManager.Shared.Wrapper;
 using System.ComponentModel.DataAnnotations;
 
@@ -26,14 +27,19 @@ namespace SuppliersManager.Application.Features.Suppliers.Commands
 
     internal class UpdateSupplierCommandHandler : IRequestHandler<UpdateSupplierCommand, IResult>
     {
+        private readonly ISupplierService _supplierService;
 
-        public UpdateSupplierCommandHandler()
+        public UpdateSupplierCommandHandler(ISupplierService supplierService)
         {
+            _supplierService = supplierService;
         }
 
         public async Task<IResult> Handle(UpdateSupplierCommand command, CancellationToken cancellationToken)
         {
-            return await Result.SuccessAsync();
+            return await _supplierService.UpdateAsync(command);
         }
     }
 }
+
+
+

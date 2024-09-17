@@ -11,6 +11,7 @@ namespace SuppliersManager.Infrastructure.MongoDBDriver.Extensions
             return services
                 .AddScoped(typeof(IRepositoryAsync<>), typeof(RepositoryAsync<>))
                 .AddScoped<IUserRepository, UserRepository>()
+                .AddScoped<ISupplierRepository, SupplierRepository>()
                 .AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
         }
     }
