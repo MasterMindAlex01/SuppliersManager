@@ -7,12 +7,14 @@ using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.IdGenerators;
 using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
+using SuppliersManager.Application.Extensions;
 using SuppliersManager.Application.Interfaces.Repositories;
 using SuppliersManager.Application.Interfaces.Services;
 using SuppliersManager.Application.Models.Settings;
 using SuppliersManager.Domain.Contracts;
 using SuppliersManager.Infrastructure.MongoDBDriver.Repositories;
 using SuppliersManager.Infrastructure.MongoDBDriver.Services;
+using System.Reflection;
 using System.Text;
 
 namespace SuppliersManager.Api
@@ -22,6 +24,9 @@ namespace SuppliersManager.Api
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+
+            builder.Services.AddControllers();
 
             // Add services to the container.
 
@@ -45,15 +50,17 @@ namespace SuppliersManager.Api
                   .SetSerializer(new StringSerializer(BsonType.ObjectId));
             });
 
+            builder.Services.AddApplicationLayer();
 
             builder.Services
                 .AddScoped(typeof(IRepositoryAsync<>), typeof(RepositoryAsync<>))
+                .AddScoped<IUserRepository, UserRepository>()
                 .AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
 
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<IUserService, UserService>();
 
-            builder.Services.AddControllers();
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(c =>
