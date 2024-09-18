@@ -23,7 +23,7 @@ namespace SuppliersManager.Api.Extensions
         {
             services.Configure<MongoDBSettings>(configuration.GetSection("MongoDB"));
             services.AddSingleton<IPasswordHasherSettings, PasswordHasherSettings>();
-            
+
             return services;
         }
 
@@ -38,19 +38,6 @@ namespace SuppliersManager.Api.Extensions
                 var database = mongoSettings!.Value.DatabaseName;
                 return client.GetDatabase(database);
             });
-        }
-
-        internal static IServiceCollection AddMongoConfigurations(this IServiceCollection services)
-        {
-            BsonClassMap.RegisterClassMap<BaseEntity>(cm =>
-            {
-                cm.AutoMap();
-                cm.GetMemberMap(x => x.Id)
-                  .SetIdGenerator(StringObjectIdGenerator.Instance)
-                  .SetSerializer(new StringSerializer(BsonType.ObjectId));
-            });
-
-            return services;
         }
 
         internal static IServiceCollection AddCurrentUserService(this IServiceCollection services)
@@ -104,7 +91,7 @@ namespace SuppliersManager.Api.Extensions
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ISupplierService, SupplierService>();
-            
+
             return services;
         }
 

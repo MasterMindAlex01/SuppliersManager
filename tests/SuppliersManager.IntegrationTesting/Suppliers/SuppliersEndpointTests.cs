@@ -2,9 +2,12 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using SuppliersManager.Api;
+using SuppliersManager.Api.Configurations;
 using SuppliersManager.Application.Features.Suppliers.Commands;
+using SuppliersManager.Application.Models.Responses.Suppliers;
 using SuppliersManager.Shared.Wrapper;
 using System.Net;
+using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
 
@@ -31,8 +34,8 @@ namespace SuppliersManager.IntegrationTesting.Suppliers
 
             // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-            var content = await response.Content.ReadAsStringAsync();
-            Assert.NotEmpty(content);
+            var content = await response.Content.ReadFromJsonAsync<PaginatedResult<SupplierResponse>>();
+            Assert.NotEmpty(content!.Data);
         }
 
         [Fact]
@@ -55,7 +58,7 @@ namespace SuppliersManager.IntegrationTesting.Suppliers
 
             // Assert
             response.EnsureSuccessStatusCode();
-            Assert.Equal(HttpStatusCode.Created, response.StatusCode);
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
             var responseContent = await response.Content.ReadAsStringAsync();
             var createdId = JsonSerializer.Deserialize<Result<string>>(responseContent);

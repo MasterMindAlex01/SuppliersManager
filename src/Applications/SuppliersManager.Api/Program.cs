@@ -1,10 +1,7 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
+using SuppliersManager.Api.Configurations;
 using SuppliersManager.Api.Extensions;
 using SuppliersManager.Application.Extensions;
 using SuppliersManager.Infrastructure.MongoDBDriver.Extensions;
-using System.Text;
 
 namespace SuppliersManager.Api
 {
@@ -12,6 +9,7 @@ namespace SuppliersManager.Api
     {
         public static void Main(string[] args)
         {
+            
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddCors();
@@ -21,7 +19,10 @@ namespace SuppliersManager.Api
             // Add services to the container.
             builder.Services.AddSettings(builder.Configuration);
             //AddDatabase
-            builder.Services.AddMongoDatabase().AddMongoConfigurations();
+            builder.Services.AddMongoDatabase();
+
+            MongoMappingConfig.RegisterMappings();
+
             //Configurations Application Layer
             builder.Services.AddApplicationLayer();
 
@@ -41,7 +42,7 @@ namespace SuppliersManager.Api
 
             app.UseSwagger();
             app.UseSwaggerUI();
-            
+
 
             //app.UseHttpsRedirection();
 
