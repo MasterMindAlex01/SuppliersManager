@@ -23,6 +23,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuppliersManager.Infrastruc
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{0F3180C2-2FC2-4EBD-81C5-8618B1697D2D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{E8BF8B5E-EA45-4F6F-BE60-A74445F3CCCA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuppliersManager.Tests", "tests\SuppliersManager.Tests\SuppliersManager.Tests.csproj", "{40C33748-DA6F-4C40-8A7C-6881168C3946}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +57,10 @@ Global
 		{0F3180C2-2FC2-4EBD-81C5-8618B1697D2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F3180C2-2FC2-4EBD-81C5-8618B1697D2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F3180C2-2FC2-4EBD-81C5-8618B1697D2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40C33748-DA6F-4C40-8A7C-6881168C3946}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40C33748-DA6F-4C40-8A7C-6881168C3946}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40C33748-DA6F-4C40-8A7C-6881168C3946}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40C33748-DA6F-4C40-8A7C-6881168C3946}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +74,7 @@ Global
 		{F75D5D02-C250-43DC-AFAE-6A458C85D387} = {CFB4B8E2-5709-46D8-A9FF-2DE09582844F}
 		{28C081FB-213F-48C5-A39D-D5208BB9FE93} = {CFB4B8E2-5709-46D8-A9FF-2DE09582844F}
 		{9FE52C4C-954A-4811-88FD-45BE6B522A80} = {C9579494-FBF0-44F9-8C17-0E1CF21FE6CD}
+		{40C33748-DA6F-4C40-8A7C-6881168C3946} = {E8BF8B5E-EA45-4F6F-BE60-A74445F3CCCA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CE73948B-9222-4C27-9B30-F812668A27FF}

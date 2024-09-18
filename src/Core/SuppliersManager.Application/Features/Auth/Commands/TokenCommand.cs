@@ -1,16 +1,17 @@
 ﻿using MediatR;
 using SuppliersManager.Application.Interfaces.Services;
+using SuppliersManager.Shared.Wrapper;
 
 namespace SuppliersManager.Application.Features.Auth.Commands
 {
-    public class TokenCommand : IRequest<TokenCommandResponse>
+    public class TokenCommand : IRequest<IResult<TokenCommandResponse>>
     {
         public string UserName { get; set; } = default!;
         public string Password { get; set; } = default!;
 
     }
 
-    internal class TokenCommandHandler : IRequestHandler<TokenCommand, TokenCommandResponse>
+    internal class TokenCommandHandler : IRequestHandler<TokenCommand, IResult<TokenCommandResponse>>
     {
         private readonly IAuthService _authService;
 
@@ -19,14 +20,9 @@ namespace SuppliersManager.Application.Features.Auth.Commands
             _authService = authService;
         }
 
-        public async Task<TokenCommandResponse> Handle(TokenCommand command, CancellationToken cancellationToken)
+        public async Task<IResult<TokenCommandResponse>> Handle(TokenCommand command, CancellationToken cancellationToken)
         {
-           var result = await _authService.LoginJWT(command);
-            if (!result.Succeeded)
-            {
-                return null!;
-            }
-            return result.Data;
+           return await _authService.LoginJWT(command);
         }
     }
 
