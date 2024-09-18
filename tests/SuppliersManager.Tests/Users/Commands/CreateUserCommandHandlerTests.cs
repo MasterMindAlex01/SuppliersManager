@@ -12,10 +12,8 @@ namespace SuppliersManager.Tests.Users.Commands
 
         public CreateUserCommandHandlerTests()
         {
-            // Simular el repositorio de proveedores
             _userServiceMock = new Mock<IUserService>();
 
-            // Crear una instancia del manejador con la dependencia simulada
             _handler = new CreateUserCommandHandler(_userServiceMock.Object);
         }
 
@@ -34,7 +32,6 @@ namespace SuppliersManager.Tests.Users.Commands
             };
             var expectedId = await Result<string>.SuccessAsync("66e9e46ffd4b3a74c70995b3", "");
 
-            // Configurar el mock del servicio para que devuelva un ID esperado
             _userServiceMock
                 .Setup(service => service.AddAsync(It.IsAny<CreateUserCommand>()))
                 .ReturnsAsync(expectedId);

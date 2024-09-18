@@ -12,10 +12,8 @@ namespace SuppliersManager.Tests.Suppliers.Commands
 
         public DeleteSupplierCommandHandlerTests()
         {
-            // Simular el repositorio de proveedores
             _supplierServiceMock = new Mock<ISupplierService>();
 
-            // Crear una instancia del manejador con la dependencia simulada
             _handler = new DeleteSupplierCommandHandler(_supplierServiceMock.Object);
         }
 
@@ -27,7 +25,6 @@ namespace SuppliersManager.Tests.Suppliers.Commands
             var command = new DeleteSupplierCommand(id);
             var resultExpected = await Result.SuccessAsync();
 
-            // Configurar el mock del servicio para que devuelva un ID esperado
             _supplierServiceMock
                 .Setup(service => service.DeleteAsync(It.IsAny<string>()))
                 .ReturnsAsync(resultExpected);

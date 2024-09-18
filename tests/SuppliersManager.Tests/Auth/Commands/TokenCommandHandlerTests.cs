@@ -12,10 +12,8 @@ namespace SuppliersManager.Tests.Auth.Commands
 
         public TokenCommandHandlerTests()
         {
-            // Simular el repositorio de proveedores
             _authServiceMock = new Mock<IAuthService>();
 
-            // Crear una instancia del manejador con la dependencia simulada
             _handler = new TokenCommandHandler(_authServiceMock.Object);
         }
 
@@ -30,7 +28,6 @@ namespace SuppliersManager.Tests.Auth.Commands
             };
             var expectedId = await Result<TokenCommandResponse>.SuccessAsync();
 
-            // Configurar el mock del servicio para que devuelva un ID esperado
             _authServiceMock
                 .Setup(service => service.LoginJWT(It.IsAny<TokenCommand>()))
                 .ReturnsAsync(expectedId);

@@ -17,10 +17,8 @@ namespace SuppliersManager.Tests.Users.Commands
 
         public UpdateUserCommandHandlerTests()
         {
-            // Simular el repositorio de proveedores
             _userServiceMock = new Mock<IUserService>();
 
-            // Crear una instancia del manejador con la dependencia simulada
             _handler = new UpdateUserCommandHandler(_userServiceMock.Object);
         }
 
@@ -37,7 +35,6 @@ namespace SuppliersManager.Tests.Users.Commands
             };
             var resultExpected = await Result.SuccessAsync();
 
-            // Configurar el mock del servicio para que devuelva un ID esperado
             _userServiceMock
                 .Setup(service => service.UpdateAsync(It.IsAny<UpdateUserCommand>()))
                 .ReturnsAsync(resultExpected);

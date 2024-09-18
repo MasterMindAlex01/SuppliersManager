@@ -12,10 +12,8 @@ namespace SuppliersManager.Tests.Suppliers.Commands
 
         public UpdateSupplierCommandHandlerTests()
         {
-            // Simular el repositorio de proveedores
             _supplierServiceMock = new Mock<ISupplierService>();
 
-            // Crear una instancia del manejador con la dependencia simulada
             _handler = new UpdateSupplierCommandHandler(_supplierServiceMock.Object);
         }
 
@@ -34,7 +32,6 @@ namespace SuppliersManager.Tests.Suppliers.Commands
             };
             var resultExpected = await Result.SuccessAsync();
 
-            // Configurar el mock del servicio para que devuelva un ID esperado
             _supplierServiceMock
                 .Setup(service => service.UpdateAsync(It.IsAny<UpdateSupplierCommand>()))
                 .ReturnsAsync(resultExpected);

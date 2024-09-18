@@ -12,10 +12,8 @@ namespace SuppliersManager.Tests.Suppliers.Commands
 
         public CreateSupplierCommandHandlerTests()
         {
-            // Simular el repositorio de proveedores
             _supplierServiceMock = new Mock<ISupplierService>();
 
-            // Crear una instancia del manejador con la dependencia simulada
             _handler = new CreateSupplierCommandHandler(_supplierServiceMock.Object);
         }
 
