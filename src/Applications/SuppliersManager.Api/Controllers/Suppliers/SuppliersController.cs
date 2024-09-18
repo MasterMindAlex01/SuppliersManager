@@ -45,7 +45,7 @@ namespace SuppliersManager.Api.Controllers.Suppliers
 
         // DELETE api/<SuppliersController>/5
         [HttpDelete("delete")]
-        public async Task<ActionResult> Delete(string id)
+        public async Task<ActionResult> Delete([FromQuery] string id)
         {
             var command = new DeleteSupplierCommand(id);
             var result = await _mediator.Send(command);

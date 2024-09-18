@@ -1,12 +1,9 @@
 ﻿using SuppliersManager.Api;
-using SuppliersManager.Api.Configurations;
-using SuppliersManager.Application.Features.Auth.Commands;
 using SuppliersManager.Application.Features.Suppliers.Commands;
 using SuppliersManager.Application.Models.Responses.Suppliers;
 using SuppliersManager.Shared.Wrapper;
 using System.Net;
 using System.Net.Http.Headers;
-using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
@@ -25,12 +22,30 @@ namespace SuppliersManager.IntegrationTesting.Suppliers
         }
 
         [Fact]
+        public async Task GetSupplierById_ReturnsOkResponse()
+        {
+            // Arrange
+            string id = "66e9e3f8fd4b3a74c70995b2";
+
+            // Act
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var response = await _client.GetAsync($"{urlController}/GetSupplierById?id={id}");
+            response.EnsureSuccessStatusCode();
+
+            // Assert
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            var content = await response.Content.ReadFromJsonAsync<Result<SupplierResponse>>();
+            Assert.NotNull(content);
+            Assert.NotNull(content.Data);
+        }
+
+        [Fact]
         public async Task GetAllSuppliers_ReturnsOkResponse()
         {
             // Arrange
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
             // Act
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var response = await _client.GetAsync($"{urlController}/GetAll?pageNumber=1&pagesize=10");
             response.EnsureSuccessStatusCode();
 
@@ -90,6 +105,27 @@ namespace SuppliersManager.IntegrationTesting.Suppliers
             // Act
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var response = await _client.PutAsync($"{urlController}/update", content);
+
+            // Assert
+            response.EnsureSuccessStatusCode();
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
+            var responseContent = await response.Content.ReadAsStringAsync();
+            var createdId = JsonSerializer.Deserialize<Result>(responseContent);
+            var result = await Result.SuccessAsync();
+
+            Assert.NotEqual(result, createdId);
+        }
+
+        [Fact]
+        public async Task DeleteSupplier_ReturnsOkResponse()
+        {
+            // Arrange
+            string id = "66e9e4c9fd4b3a74c70995b4";
+
+            // Act
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var response = await _client.DeleteAsync($"{urlController}/delete?id={id}");
 
             // Assert
             response.EnsureSuccessStatusCode();
