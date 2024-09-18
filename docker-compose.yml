@@ -1,0 +1,20 @@
+services:
+  suppliersmanager.api:
+    image: alexdrdeveloper01/suppliersmanagerapi
+    build:
+      context: .
+      dockerfile: src/Applications/SuppliersManager.Api/Dockerfile
+
+  mongo:
+    image: mongo:latest
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - 28018:27017
+    volumes:
+      - mongodb_data_container:/data/db
+
+volumes:
+  mongodb_data_container:

@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuppliersManager.Domain", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuppliersManager.Infrastructure.MongoDBDriver", "src\Infrastructure\SuppliersManager.Infrastructure\SuppliersManager.Infrastructure.MongoDBDriver.csproj", "{9FE52C4C-954A-4811-88FD-45BE6B522A80}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{0F3180C2-2FC2-4EBD-81C5-8618B1697D2D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{9FE52C4C-954A-4811-88FD-45BE6B522A80}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FE52C4C-954A-4811-88FD-45BE6B522A80}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9FE52C4C-954A-4811-88FD-45BE6B522A80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F3180C2-2FC2-4EBD-81C5-8618B1697D2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F3180C2-2FC2-4EBD-81C5-8618B1697D2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F3180C2-2FC2-4EBD-81C5-8618B1697D2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F3180C2-2FC2-4EBD-81C5-8618B1697D2D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
