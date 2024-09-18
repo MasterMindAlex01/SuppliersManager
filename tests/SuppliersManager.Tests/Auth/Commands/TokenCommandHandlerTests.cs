@@ -26,7 +26,7 @@ namespace SuppliersManager.Tests.Auth.Commands
                 UserName = "Test",
                 Password = "Test",
             };
-            var expectedId = await Result<TokenCommandResponse>.SuccessAsync();
+            var expectedId = await Result<TokenResponse>.SuccessAsync();
 
             _authServiceMock
                 .Setup(service => service.LoginJWT(It.IsAny<TokenCommand>()))

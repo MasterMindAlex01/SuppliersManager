@@ -21,8 +21,8 @@ namespace SuppliersManager.Api
             MongoMappingConfig.RegisterMappings();
             
             builder.Services.AddSettings(builder.Configuration);
-            //AddDatabase
             
+            //AddDatabase
             builder.Services.AddMongoDatabase();
 
             //Configurations Application Layer

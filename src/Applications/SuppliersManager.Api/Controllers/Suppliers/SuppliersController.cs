@@ -7,7 +7,7 @@ using SuppliersManager.Application.Features.Suppliers.Queries;
 
 namespace SuppliersManager.Api.Controllers.Suppliers
 {
-    //[Authorize]
+    [Authorize]
     public class SuppliersController : BaseApiController<SuppliersController>
     {
         // GET: api/<SuppliersController>

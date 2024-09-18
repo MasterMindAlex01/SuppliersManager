@@ -6,7 +6,7 @@ namespace SuppliersManager.Api.Controllers
 {
     public class AuthController : BaseApiController<AuthController>
     {        
-        // POST api/Auth
+        // POST v1/Auth
         [HttpPost("login")]
         public async Task<IActionResult> LoginToken(TokenCommand command)
         {

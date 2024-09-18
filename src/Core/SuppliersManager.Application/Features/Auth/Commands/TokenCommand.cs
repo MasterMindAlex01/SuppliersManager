@@ -4,14 +4,14 @@ using SuppliersManager.Shared.Wrapper;
 
 namespace SuppliersManager.Application.Features.Auth.Commands
 {
-    public class TokenCommand : IRequest<IResult<TokenCommandResponse>>
+    public class TokenCommand : IRequest<IResult<TokenResponse>>
     {
         public string UserName { get; set; } = default!;
         public string Password { get; set; } = default!;
 
     }
 
-    internal class TokenCommandHandler : IRequestHandler<TokenCommand, IResult<TokenCommandResponse>>
+    internal class TokenCommandHandler : IRequestHandler<TokenCommand, IResult<TokenResponse>>
     {
         private readonly IAuthService _authService;
 
@@ -20,13 +20,13 @@ namespace SuppliersManager.Application.Features.Auth.Commands
             _authService = authService;
         }
 
-        public async Task<IResult<TokenCommandResponse>> Handle(TokenCommand command, CancellationToken cancellationToken)
+        public async Task<IResult<TokenResponse>> Handle(TokenCommand command, CancellationToken cancellationToken)
         {
            return await _authService.LoginJWT(command);
         }
     }
 
-    public class TokenCommandResponse
+    public class TokenResponse
     {
         public string AccessToken { get; set; } = default!;
     }

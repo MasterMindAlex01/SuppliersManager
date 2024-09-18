@@ -10,6 +10,6 @@ namespace SuppliersManager.Application.Interfaces.Services
 {
     public interface IAuthService
     {
-        Task<IResult<TokenCommandResponse>> LoginJWT(TokenCommand command);
+        Task<IResult<TokenResponse>> LoginJWT(TokenCommand command);
     }
 }

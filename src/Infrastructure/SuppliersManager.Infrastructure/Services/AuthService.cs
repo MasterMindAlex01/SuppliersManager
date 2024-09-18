@@ -30,17 +30,17 @@ namespace SuppliersManager.Infrastructure.MongoDBDriver.Services
             _iteration = passwordHasherSettings.Iteration;
         }
 
-        public async Task<IResult<TokenCommandResponse>> LoginJWT(TokenCommand command)
+        public async Task<IResult<TokenResponse>> LoginJWT(TokenCommand command)
         {
             var user = await _userRepository.GetUserByUserNameAsync(command.UserName);
 
             if (user == null)
             {
-                return await Result<TokenCommandResponse>.FailAsync("Usuario no encontrado");
+                return await Result<TokenResponse>.FailAsync("Usuario no encontrado");
             }
             var passwordHash = PasswordHasher.ComputeHash(
                 command.Password, user.PasswordSalt, _pepper, _iteration);
-            if (user.Password != passwordHash) return await Result<TokenCommandResponse>.FailAsync("Usuario y/o contraseña incorrectas");
+            if (user.Password != passwordHash) return await Result<TokenResponse>.FailAsync("Usuario y/o contraseña incorrectas");
 
             // Generamos un token según los claims
             var claims = new List<Claim>
@@ -64,7 +64,7 @@ namespace SuppliersManager.Infrastructure.MongoDBDriver.Services
 
             var jwt = new JwtSecurityTokenHandler().WriteToken(tokenDescriptor);
             
-            return await Result<TokenCommandResponse>.SuccessAsync(new TokenCommandResponse
+            return await Result<TokenResponse>.SuccessAsync(new TokenResponse
             {
                 AccessToken = jwt
             }, "OK");

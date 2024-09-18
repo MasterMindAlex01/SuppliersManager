@@ -23,8 +23,6 @@ namespace SuppliersManager.IntegrationTesting
         {
             builder.ConfigureServices(async services =>
             {
-
-
                 // Reemplazar la configuración de MongoDB para pruebas
                 services.Configure<MongoDBSettings>(options =>
                 {
