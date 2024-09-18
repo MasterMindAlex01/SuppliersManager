@@ -1,7 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc.Testing;
-using SuppliersManager.Api;
+﻿using SuppliersManager.Api;
 using SuppliersManager.Api.Configurations;
 using SuppliersManager.Application.Features.Suppliers.Commands;
 using SuppliersManager.Application.Models.Responses.Suppliers;
@@ -26,6 +23,7 @@ namespace SuppliersManager.IntegrationTesting.Suppliers
         [Fact]
         public async Task GetAllSuppliers_ReturnsOkResponse()
         {
+            //MongoMappingConfig.RegisterMappings();
             // Arrange
             var response = await _client.GetAsync($"{urlController}/GetAll?pageNumber=1&pagesize=10");
 
@@ -41,6 +39,7 @@ namespace SuppliersManager.IntegrationTesting.Suppliers
         [Fact]
         public async Task CreateSupplier_ReturnsCreatedResponse()
         {
+            //MongoMappingConfig.RegisterMappings();
             // Arrange
             var newSupplier = new CreateSupplierCommand()
             {

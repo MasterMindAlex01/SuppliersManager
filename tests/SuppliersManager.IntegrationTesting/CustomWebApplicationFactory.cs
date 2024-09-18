@@ -16,7 +16,6 @@ namespace SuppliersManager.IntegrationTesting
 
         public CustomWebApplicationFactory()
         {
-            MongoMappingConfig.RegisterMappings();
             _mongoRunner = MongoDbRunner.Start(); // Iniciar MongoDB en memoria
         }
         

@@ -15,13 +15,15 @@ namespace SuppliersManager.Api
             builder.Services.AddCors();
             builder.Services.AddControllers();
 
-            builder.Services.AddCurrentUserService();
             // Add services to the container.
-            builder.Services.AddSettings(builder.Configuration);
-            //AddDatabase
-            builder.Services.AddMongoDatabase();
+            builder.Services.AddCurrentUserService();
 
             MongoMappingConfig.RegisterMappings();
+            
+            builder.Services.AddSettings(builder.Configuration);
+            //AddDatabase
+            
+            builder.Services.AddMongoDatabase();
 
             //Configurations Application Layer
             builder.Services.AddApplicationLayer();

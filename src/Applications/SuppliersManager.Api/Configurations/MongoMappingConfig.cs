@@ -10,6 +10,7 @@ namespace SuppliersManager.Api.Configurations
     {
         public static void RegisterMappings()
         {
+
             if (!BsonClassMap.IsClassMapRegistered(typeof(BaseEntity)))
             {
                 BsonClassMap.RegisterClassMap<BaseEntity>(cm =>
