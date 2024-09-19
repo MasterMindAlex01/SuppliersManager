@@ -12,6 +12,8 @@ namespace SuppliersManager.Api
             
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.AddConfigurations();
+
             builder.Services.AddCors();
             builder.Services.AddControllers();
 
