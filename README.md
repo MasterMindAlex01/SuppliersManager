@@ -8,8 +8,6 @@ Para comenzar con este projecto, aquí están las opciones disponibles:
 # Development Environment - Prerequisitos
 
   - .NET SDK: 6.0
-  - IDE: Visual studio 2022 o Visual studio Code
-  - Base de datos: SQLServer - SQL Server Management Studio (SSMS)
   - API Testing Tools: POSTMAN
   - docker
   - mongodb
@@ -43,7 +41,8 @@ Paso para correr los proyectos:
    1) Instalar el SDK de .NET
    Asegúrate de tener instalado el SDK de .NET en tu máquina. Puedes verificar si está instalado escribiendo en la terminal:
 
-            dotnet --version
+          dotnet --version
+
   Si no lo tienes instalado, puedes descargarlo desde la página oficial de .NET.
   
   2) Abrir la terminal
@@ -51,12 +50,12 @@ Paso para correr los proyectos:
 
     cd ruta/a/tu/proyecto/src/Applications/SuppliersManager.Api
   
-  3) Restaurar dependencias (si es necesario)
+  3) Restaurar dependencias (si es necesario):
   Si es la primera vez que corres el proyecto o si has agregado nuevas dependencias, es recomendable restaurarlas con el siguiente comando:
 
     dotnet restore
    
-  4) Ejecutar el proyecto 
+  4) Ejecutar el proyecto: 
   Para ejecutar tu proyecto, simplemente usa el siguiente comando:
 
     dotnet run
@@ -67,11 +66,12 @@ Paso para correr los proyectos:
   con este podemos navergar a https://localhost:7079/swagger/index.html para ver la documentacion en swagger de los endpoints
 
 
-3) Docker
+3) Docker:
    Para ejecutar la aplicacion desde docker usar el comando docker-compose up -d esto inicia un grupo de contenedores con una imagen del proyecto y obtener imagen de mongo conectado a la app
 
        docker-compose up -d
-   para cerrar la instancia usar
+
+   para cerrar la instancia usar el commando:
 
        docker-compose down
    
