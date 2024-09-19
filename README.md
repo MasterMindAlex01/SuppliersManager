@@ -63,8 +63,8 @@ Paso para correr los proyectos:
 
   Esto compilará y ejecutará el proyecto. Si tu solución tiene varios proyectos, asegúrate de estar en la carpeta que contiene el proyecto que deseas ejecutar o especifica la ruta al archivo .csproj del proyecto.
   
-  Nota: asegurese de que la aplicacion se este escuchando por "https://localhost:7119" la terminal le arrojara este mensaje Now listening on: https://localhost:7119
-  con este podemos navergar a https://localhost:7119/swagger/index.html para ver la documentacion en swagger de los endpoints
+  Nota: asegurese de que la aplicacion se este escuchando por "https://localhost:7079/swagger/index.html" la terminal le arrojara este mensaje Now listening on: https://localhost:7079
+  con este podemos navergar a https://localhost:7079/swagger/index.html para ver la documentacion en swagger de los endpoints
 
 
 3) Docker
