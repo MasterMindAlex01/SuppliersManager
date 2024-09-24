@@ -21,4 +21,10 @@
     <ProjectReference Include="..\..\Infrastructure\SuppliersManager.Infrastructure\SuppliersManager.Infrastructure.MongoDBDriver.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="https\aspnetapp.pfx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
